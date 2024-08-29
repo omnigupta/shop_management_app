@@ -7,6 +7,10 @@ fd.close()
 #Taling user input
 ui_username = input("Enter name:")
 ui_phone = input("Enter Phone No:")
+if ui_phone.isdigit() and len(ui_phone) == 10:  # Assuming a 10-digit phone number
+    print(f"Phone number entered: {ui_phone}")
+else:
+    print("Invalid phone number. Please enter a 10-digit number.")
 ui_email = input("Enter Email:")
 ui_prod_id = input("Enter Product Id:")
 ui_prod_qn = input("Enter Product Quantity:")

@@ -1,5 +1,5 @@
 1,5 Star,5,80
-2,Milky Bar,5,196
-3,Cake,300,10
+2,Milky Bar,5,192
+3,Cake,300,0
 4,Candy,1,990
 5,Dairymilk,10,50
