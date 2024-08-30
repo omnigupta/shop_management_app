@@ -1,4 +1,6 @@
 import time
+import sys
+import re
 # Reading the Inventory
 fd=open("Inventory.txt",'r')
 products=fd.read().split('\n')
@@ -6,12 +8,30 @@ fd.close()
 
 #Taling user input
 ui_username = input("Enter name:")
-ui_phone = input("Enter Phone No:")
-if ui_phone.isdigit() and len(ui_phone) == 10:  # Assuming a 10-digit phone number
-    print(f"Phone number entered: {ui_phone}")
-else:
-    print("Invalid phone number. Please enter a 10-digit number.")
-ui_email = input("Enter Email:")
+check_counter = 0
+for i in range(5):
+    check_counter += 1
+    ui_phone = input("Enter Phone No:")
+    if ui_phone.isdigit() and len(ui_phone) == 10:  # Assuming a 10-digit phone number
+        break
+    
+    else:
+        print("Invalid phone number. Please enter a 10-digit number.")
+if check_counter>4:
+    sys.exit()
+
+check_counter = 0    
+for i in range(5):
+    check_counter += 1
+    email_regex = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
+    ui_email = input("Enter Email:")
+    if re.match(email_regex, ui_email):
+        break
+    else:
+        print("Invalid email address. Please enter a valid email.")
+if check_counter>4:
+    sys.exit()
+
 ui_prod_id = input("Enter Product Id:")
 ui_prod_qn = input("Enter Product Quantity:")
 
@@ -26,10 +46,10 @@ for product in products:
         #Checking if we are having enough quantity 
             print("-----------------------------")
             print("Product Name           :", prod_details[1])
-            print("Price                  :", prod_details[2])
+            print("Price                  :", prod_details[2],"Rs")
             print("Quantity               :", ui_prod_qn)
             print("-----------------------------")
-            print("Billing Amount         :", int(prod_details[2])*int(ui_prod_qn))
+            print("Billing Amount         :", int(prod_details[2])*int(ui_prod_qn),"Rs")
             print("-----------------------------")
             #Updating inventory list
             prod_details[3] = str(int(prod_details[3]) - int(ui_prod_qn))
@@ -50,10 +70,10 @@ for product in products:
             #if you want to purchase with remaining quantity
                 print("-----------------------------")
                 print("Product Name           :", prod_details[1])
-                print("Price                  :", prod_details[2])
+                print("Price                  :", prod_details[2],"Rs")
                 print("Quantity               :", prod_details[3])
                 print("-----------------------------")
-                print("Billing Amount         :", int(prod_details[2])*int(prod_details[3]))
+                print("Billing Amount         :", int(prod_details[2])*int(prod_details[3]),"Rs")
                 print("-----------------------------")
             
                 #Generating Sales in Sales.txt
